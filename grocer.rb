@@ -27,14 +27,11 @@ def apply_coupons(cart, coupons)
 	 items_w_coupons = cart.clone
 	 cart.each do |grocery_item, item_hash|
   	 coupons.each do |coupon|
-  	   binding.pry
   		if coupon[:item] == grocery_item
     	items_w_coupons["#{grocery_item} W/COUPON"] = {:price => coupon[:cost], :clearance => item_hash[:clearance], :count =>  how_many_coupons?(grocery_item,coupons)}
-    	    binding.pry
     	   if item_hash[:count] % coupon[:num] != 0
     	    items_w_coupons[grocery_item][:count] = items_w_coupons[grocery_item][:count] % how_many_coupons?(grocery_item,coupons)
     	   else
-    	      binding.pry
     	    items_w_coupons.delete(grocery_item)
          end
        end
