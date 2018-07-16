@@ -24,17 +24,19 @@ def how_many_coupons?(grocery_item,coupons)
 end
 
 def apply_coupons(cart, coupons)
-	 items_w_coupons = {}
+	 items_w_coupons = cart
 	 cart.each do |grocery_item, item_hash|
   	 coupons.each do |coupon|
   	   binding.pry
   		if coupon[:item] == grocery_item
-  		items_w_coupons["#{grocery_item} W/COUPON"] = {:price => coupon[:cost], :clearance => item_hash[:clearance], :count =>  how_many_coupons?(grocery_item,coupons)}
-      else
-      items_w_coupons[grocery_item] = {:price => item_hash[:price], :clearance => item_hash[:clearance], :count => item_hash[:count]}
+    	items_w_coupons["#{grocery_item} W/COUPON"] = {:price => coupon[:cost], :clearance => item_hash[:clearance], :count =>  how_many_coupons?(grocery_item,coupons)}
+    	   if grocery_item[:count] % how_many_coupons?(grocery_item, coupons) != 0
+    	     binding.pry
+    	    items_w_coupons[grocery_item][:count] = items_w_coupons[grocery_item][:count] % how_many_coupons?(grocery_item,coupons)
+         end
        end
-     end
-   end
+      end
+    end    
   return items_w_coupons
 end
 
