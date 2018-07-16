@@ -24,7 +24,7 @@ def how_many_coupons?(grocery_item,coupons)
 end
 
 def apply_coupons(cart, coupons)
-	 items_w_coupons = {}
+	 items_w_coupons = cart.clone
 	 cart.each do |grocery_item, item_hash|
   	 coupons.each do |coupon|
   	   binding.pry
