@@ -30,7 +30,7 @@ def apply_coupons(cart, coupons)
   	   binding.pry
   		if coupon[:item] == grocery_item
     	items_w_coupons["#{grocery_item} W/COUPON"] = {:price => coupon[:cost], :clearance => item_hash[:clearance], :count =>  how_many_coupons?(grocery_item,coupons)}
-    	   if item_hash[:count] % coupon != 0
+    	   if item_hash[:count] % coupon[:num] != 0
     	     binding.pry
     	    items_w_coupons[grocery_item][:count] = items_w_coupons[grocery_item][:count] % how_many_coupons?(grocery_item,coupons)
          end
